@@ -1,10 +1,15 @@
-from sqlalchemy import create_engine 
+import os
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base
 
-engine = create_engine("sqlite:///app.db")
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///app.db")
+
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
 session = SessionLocal()
 
-Base.metadata.create_all(bind=engine)
+# Create tables only if not in production (to avoid issues with migrations)
+if os.environ.get("FLASK_ENV") != "production":
+    Base.metadata.create_all(bind=engine)
