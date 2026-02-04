@@ -9,7 +9,7 @@ from services.scoring_service import calculate_quiz_score
 from services.ai_service import generate_explanation
 
 app = Flask(__name__)
-app.secret_key = "dev-secret"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
 QUESTIONS = [
     {"id": "q1", "text": "Што те интересира најмногу?", "options": [("fullstack","Full Stack / Веб"),("frontend","Front-end"),("design","Дизајн"),("marketing","Маркетинг"),("accounting","Сметководство"),("management","Менаџмент")]},
@@ -142,5 +142,4 @@ def ai_explain(result_id):
     session.commit()
     return redirect(url_for("result_detail", result_id=r.id))
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
