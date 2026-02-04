@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твој резултат</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Твој резултат</h1>
+            <p class="tagline">
+                {% if result.created_at %}{{ result.created_at.strftime('%d.%m.%Y %H:%M') }}{% endif %}
+            </p>
+        </header>
+
+        <main class="main-content">
+            <section class="result-section">
+                <h2>Препорачана насока</h2>
+                <div class="recommendation-box">
+                    <h3>{{ result.recommended_course }}</h3>
+                    <p>{{ result.recommendation_reason }}</p>
+                </div>
+            </section>
+
+            <section class="result-section">
+                <h2>Твој скор</h2>
+                <div class="scores-grid">
+                    {% for category, points in result.score.items() %}
+                        <div class="score-card">
+                            <h4>{{ category }}</h4>
+                            <div class="score-circle">
+                                <div class="score-percent">{{ points or 0 }}</div>
+                            </div>
+                            <p>од 15 поени</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="result-section">
+                <h2>Твои одговори</h2>
+                <div class="answers-list">
+                    {% for answer in result.user_answers %}
+                        <div class="answer-item">
+                            <h4>{{ answer.question_text }}</h4>
+                            <p>{{ answer.answer_text }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            {% if result.ai_explanation %}
+                <section class="result-section ai-section">
+                    <h2>AI Објаснување</h2>
+                    <div class="explanation-box">
+                        <h4>Зошто оваа препорака?</h4>
+                        <p>{{ result.ai_explanation.explanation }}</p>
+                    </div>
+                    {% if result.ai_explanation.tips %}
+                        <div class="tips-box">
+                            <h4>Совети за почеток:</h4>
+                            <ul>
+                                {% for tip in result.ai_explanation.tips %}
+                                    <li>{{ tip }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </section>
+            {% else %}
+                <section class="result-section ai-section">
+                    <h2>Активирај AI Помошник</h2>
+                    <p>Добијте детално AI објаснување и совети за следни чекори.</p>
+                    <form method="POST" action="{{ url_for('ai_explain', result_id=result.id) }}">
+                        <button type="submit" class="btn btn-primary">Побарај AI објаснување</button>
+                    </form>
+                </section>
+            {% endif %}
+
+            <div class="nav-actions">
+                <a href="{{ url_for('results_list') }}" class="btn btn-secondary">Назад на листа</a>
+                <a href="{{ url_for('quiz') }}" class="btn btn-primary">Нов квиз</a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Course Chooser. Сите права се задржани.</p>
+        </footer>
+    </div>
+</body>
+</html>

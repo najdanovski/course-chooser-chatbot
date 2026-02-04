@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Историја на квизови</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Историја на квизови</h1>
+            <p class="tagline">Твои претходни резултати и препораки</p>
+        </header>
+
+        <main class="main-content">
+            {% if results %}
+                <div class="results-list">
+                    {% for result in results %}
+                        <div class="result-card">
+                            <div class="result-header">
+                                <h3>{{ result.recommended_course }}</h3>
+                                <span class="result-date">{{ result.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+                            </div>
+
+                            <div class="result-score">
+                                {% for category, points in result.score.items() %}
+                                    <div class="score-item">
+                                        <span class="category-name">{{ category }}</span>
+                                        <div class="score-bar">
+                                            <div class="score-fill" style="width: {{ (points / 15) * 100 }}%"></div>
+                                        </div>
+                                        <span class="score-value">{{ points }} поени</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <p class="result-reason">
+                                {{ result.recommendation_reason[:150] }}{% if result.recommendation_reason|length > 150 %}...{% endif %}
+                            </p>
+
+                            <a href="{{ url_for('result_detail', result_id=result.id) }}" class="btn btn-primary">Погледни детали</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <h2>Нема завршени квизови</h2>
+                    <p>Почни со квиз за да добиеш препорака.</p>
+                    <a href="{{ url_for('quiz') }}" class="btn btn-primary btn-large">Започни квиз</a>
+                </div>
+            {% endif %}
+
+            <div class="nav-actions">
+                <a href="{{ url_for('home') }}" class="btn btn-secondary">Назад на почетна</a>
+                <a href="{{ url_for('quiz') }}" class="btn btn-primary">Нов квиз</a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Course Chooser. Сите права се задржани.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квиз - Избирач на курсеви</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Квиз</h1>
+            <p class="tagline">Одговори на кратки прашања — ќе добиеш персонализирана препорака</p>
+        </header>
+
+        <main class="main-content">
+            <section class="quiz-section">
+                <form method="POST" action="{{ url_for('quiz', step=step) }}" class="quiz-form">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ (step / total) * 100 }}%;"></div>
+                    </div>
+                    <p class="progress-text">Прашање {{ step + 1 }} од {{ total }}</p>
+
+                    <div class="question-group">
+                        <h3>{{ question.text }}</h3>
+                        <div class="answer-options">
+                            {% for val, text in question.options %}
+                            <label class="option">
+                                <input type="radio" name="answer" value="{{ val }}" {% if saved_answer == val %}checked{% endif %} required>
+                                <span class="option-text">{{ text }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="{{ url_for('home') }}" class="btn btn-secondary">Откажи</a>
+                        <button type="submit" class="btn btn-primary">Следно</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Course Chooser. Сите права се задржани.</p>
+        </footer>
+    </div>
+</body>
+</html>

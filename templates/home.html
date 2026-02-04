@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Chooser - Најдете го вашиот совршен курс</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Course Chooser</h1>
+            <p>Најдете го вашиот совршен курс</p>
+        </header>
+
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-text">
+                    <h2>Добредојде во Course Chooser</h2>
+                    <p class="intro-text">
+                        Дали сте неодлучни кој курс или насока е прав за вас? Нашиот квиз прашања ќе ви помогне да го откријете совршениот курс врз основа на вашите интереси и цели.
+                    </p>
+                    <p class="intro-text">
+                        По завршување на квизот, нашиот AI чатбот ќе ви даде персонализирани препораки.
+                    </p>
+                </div>
+
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <h3>Квиз прашања</h3>
+                        <p>Персонализирани прашања за вашите интереси и цели</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <h3>AI препораки</h3>
+                        <p>Добијте персонализирани предлози за курсеви од нашиот чатбот</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <h3>Водство</h3>
+                        <p>Разберете кој курс е идеален за вас</p>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('quiz') }}" class="btn btn-primary btn-large">Започни квиз</a>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Course Chooser. Сите права се задржани.</p>
+        </footer>
+    </div>
+</body>
+</html>
