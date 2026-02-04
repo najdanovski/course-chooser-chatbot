@@ -10,6 +10,5 @@ SessionLocal = sessionmaker(bind=engine)
 
 session = SessionLocal()
 
-# Create tables only if not in production (to avoid issues with migrations)
 if os.environ.get("FLASK_ENV") != "production":
     Base.metadata.create_all(bind=engine)
