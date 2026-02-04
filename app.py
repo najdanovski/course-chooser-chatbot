@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session as flask_session
 from datetime import datetime
 import json
+import os
 
 from database import session
 from models import QuizResult, AIAdvice
@@ -39,6 +40,10 @@ def get_user_answers(r):
 @app.route("/")
 def home():
     return render_template("home.html")
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
