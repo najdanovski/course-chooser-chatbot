@@ -41,9 +41,6 @@ def get_user_answers(r):
 def home():
     return render_template("home.html")
 
-if __name__ == "__main__":
-    app.run()
-
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     step = int(request.args.get("step", 0))
@@ -141,4 +138,5 @@ def ai_explain(result_id):
     session.commit()
     return redirect(url_for("result_detail", result_id=r.id))
 
-
+if __name__ == "__main__":
+    app.run()
