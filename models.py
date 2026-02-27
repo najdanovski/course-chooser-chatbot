@@ -15,6 +15,11 @@ class QuizResult(Base):
     q3_answer = Column(String(50), nullable=False)
     q4_answer = Column(String(50), nullable=False)
     q5_answer = Column(String(50), nullable=False)
+    q6_answer = Column(String(50), nullable=False)
+    q7_answer = Column(String(50), nullable=False)
+    q8_answer = Column(String(50), nullable=False)
+    q9_answer = Column(String(50), nullable=False)
+    q10_answer = Column(String(50), nullable=False)
 
     score = Column(JSON, nullable=False)
     recommendation = Column(String(50), nullable=False)
