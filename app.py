@@ -12,11 +12,126 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
 QUESTIONS = [
-    {"id": "q1", "text": "Што те интересира најмногу?", "options": [("fullstack","Full Stack / Веб"),("frontend","Front-end"),("design","Дизајн"),("marketing","Маркетинг"),("accounting","Сметководство"),("management","Менаџмент")]},
-    {"id": "q2", "text": "Колку ти се допаѓа математика и логика?", "options": [("logic","Многу – сакам решавачки задачи"),("visual","Повеќе визуелно / креативно"),("analysis","Аналитика и податоци"),("communication","Работа со луѓе")]},
-    {"id": "q3", "text": "Како сакаш да работиш?", "options": [("solo","Самостојно"),("team","Во тим"),("mixed","Комбинирано")]},
-    {"id": "q4", "text": "Кој тип задачи те привлекуваат?", "options": [("technology","Технологија / кодирање"),("creativity","Креативност"),("stability","Стабилност"),("business","Бизнис")]},
-    {"id": "q5", "text": "Колку време неделно можеш да посветиш?", "options": [("very_high","5+ часа"),("high","3–5 часа"),("medium","1–3 часа"),("low","Под 1 час")]}
+    {
+        "id": "q1",
+        "text": "Што најмногу те мотивира кога работиш?",
+        "options": [
+            ("fullstack", "Решавање логички и технички проблеми"),
+            ("frontend", "Подобрување на корисничко искуство"),
+            ("design", "Креативен и визуелен дизајн"),
+            ("marketing", "Раст и промоција на бренд"),
+            ("accounting", "Точност и финансиска сигурност"),
+            ("management", "Организација и водење тим")
+        ]
+    },
+    {
+        "id": "q2",
+        "text": "Кој тип задачи најмногу ти лежи?",
+        "options": [
+            ("fullstack", "Кодирање и логика"),
+            ("frontend", "Работа со интерфејси"),
+            ("design", "Дизајнирање и визуелно обликување"),
+            ("marketing", "Комуникација и анализа на пазар"),
+            ("accounting", "Работа со бројки и табели"),
+            ("management", "Планирање и координација")
+        ]
+    },
+    {
+        "id": "q3",
+        "text": "Во училиште најмногу уживаше во:",
+        "options": [
+            ("fullstack", "Математика и информатика"),
+            ("frontend", "Информатика со визуелен дел"),
+            ("design", "Ликовно и уметност"),
+            ("marketing", "Економија и маркетинг"),
+            ("accounting", "Сметководство и финансии"),
+            ("management", "Тимски и лидерски проекти")
+        ]
+    },
+    {
+        "id": "q4",
+        "text": "Како сакаш да работиш?",
+        "options": [
+            ("fullstack", "Самостојно и фокусирано"),
+            ("frontend", "Со јасен визуелен резултат"),
+            ("design", "Креативно и слободно"),
+            ("marketing", "Со луѓе и клиенти"),
+            ("accounting", "Со податоци и извештаи"),
+            ("management", "Со тим кој го водиш")
+        ]
+    },
+    {
+        "id": "q5",
+        "text": "Кога гледаш веб апликација, прво забележуваш:",
+        "options": [
+            ("fullstack", "Како функционира во позадина"),
+            ("frontend", "Колку е лесна за користење"),
+            ("design", "Како изгледа"),
+            ("marketing", "Како се рекламира"),
+            ("accounting", "Колку е профитабилна"),
+            ("management", "Како е организиран тимот")
+        ]
+    },
+    {
+        "id": "q6",
+        "text": "Која работа би ја избрал?",
+        "options": [
+            ("fullstack", "Развивање целосни софтверски системи"),
+            ("frontend", "Изработка на веб интерфејси"),
+            ("design", "UX/UI и графички дизајн"),
+            ("marketing", "Креирање маркетинг стратегии"),
+            ("accounting", "Финансиска анализа"),
+            ("management", "Управување со проекти")
+        ]
+    },
+    {
+        "id": "q7",
+        "text": "Кој тип проблем најмногу сакаш да решаваш?",
+        "options": [
+            ("fullstack", "Технички проблеми"),
+            ("frontend", "Проблеми со корисничко искуство"),
+            ("design", "Визуелни проблеми"),
+            ("marketing", "Пазарни проблеми"),
+            ("accounting", "Финансиски проблеми"),
+            ("management", "Организациски проблеми")
+        ]
+    },
+    {
+        "id": "q8",
+        "text": "Што ти е најважно во кариерата?",
+        "options": [
+            ("fullstack", "Технички напредок"),
+            ("frontend", "Задоволство на корисници"),
+            ("design", "Креативна слобода"),
+            ("marketing", "Влијание и комуникација"),
+            ("accounting", "Стабилност и сигурност"),
+            ("management", "Лидерство")
+        ]
+    },
+    {
+        "id": "q9",
+        "text": "Како реагираш под притисок?",
+        "options": [
+            ("fullstack", "Анализирам и решавам логички"),
+            ("frontend", "Го подобрувам решението"),
+            ("design", "Креирам подобар дизајн"),
+            ("marketing", "Комуницирам и убедувам"),
+            ("accounting", "Ги проверувам бројките"),
+            ("management", "Донесувам одлуки")
+        ]
+    },
+    {
+        "id": "q10",
+        "text": "Каде се гледаш за 5 години?",
+        "options": [
+            ("fullstack", "Како софтвер инженер"),
+            ("frontend", "Како Front-End developer"),
+            ("design", "Како UX/UI дизајнер"),
+            ("marketing", "Како маркетинг експерт"),
+            ("accounting", "Како финансиски аналитичар"),
+            ("management", "Како менаџер или лидер")
+        ]
+    }
 ]
 
 RECOMMENDATIONS = {
@@ -27,15 +142,23 @@ RECOMMENDATIONS = {
     'accounting': ('Accounting', 'Точност, анализа и работа со бројки.'),
     'management': ('Management', 'Организациски и лидерски способности.')
 }
+def get_answer_text(question_id, answer_value):
+    for q in QUESTIONS:
+        if q["id"] == question_id:
+            for value, text in q["options"]:
+                if value == answer_value:
+                    return text
+    return answer_value
 
 def get_user_answers(r):
-    return [
-        {"question_text": "Интерес", "answer_text": r.q1_answer},
-        {"question_text": "Логика / Математика", "answer_text": r.q2_answer},
-        {"question_text": "Тим или самостојно", "answer_text": r.q3_answer},
-        {"question_text": "Кариерна цел", "answer_text": r.q4_answer},
-        {"question_text": "Време неделно", "answer_text": r.q5_answer},
-    ]
+    answers = []
+    for i, q in enumerate(QUESTIONS, start=1):
+        raw_value = getattr(r, f"q{i}_answer")
+        answers.append({
+            "question_text": q["text"],
+            "answer_text": get_answer_text(q["id"], raw_value)  
+        })
+    return answers
 
 @app.route("/")
 def home():
@@ -115,7 +238,10 @@ def ai_explain(result_id):
         flash("Резултатот не беше најден.", "error")
         return redirect(url_for("results_list"))
 
-    answers = {f"q{i+1}": getattr(r, f"q{i+1}_answer") for i in range(5)}
+    answers = {
+    f"q{i+1}": getattr(r, f"q{i+1}_answer")
+    for i in range(len(QUESTIONS))
+    }
     ai_result = generate_explanation(answers, r.recommendation)
 
     if not ai_result:
